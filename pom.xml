@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Sun Dec 25 11:39:29 PM EST 2022 -->
+<!-- Generated: Mon Dec 26 01:44:33 AM EST 2022 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -21,6 +21,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<!-- Maven Plugins -->
+		<maven-resources-plugin-version>3.3.0</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>3.3.0</maven-jar-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
@@ -53,8 +54,30 @@
 		<sourceDirectory>src/</sourceDirectory>
 		<outputDirectory>target/classes/</outputDirectory>
 		<finalName>${project.name}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>resources/</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>plugin.yml</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 
+			<!-- Resource Plugin -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>${maven-resources-plugin-version}</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>png</nonFilteredFileExtension>
+						<nonFilteredFileExtension>so</nonFilteredFileExtension>
+						<nonFilteredFileExtension>dll</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
 			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
