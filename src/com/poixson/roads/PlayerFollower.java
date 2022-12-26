@@ -76,16 +76,22 @@ public class PlayerFollower implements Listener {
 			return;
 		final Location from = event.getFrom();
 		final Location to   = event.getTo();
+		// stop following outside of world
+		final World world = to.getWorld();
+		if (!this.start_world.equals(world)) {
+			this.plugin.stopFollower(this.player);
+			return;
+		}
 		// location changed
 		final int total =
 				(to.getBlockX() - from.getBlockX()) +
 				(to.getBlockZ() - from.getBlockZ());
 		if (total == 0) return;
 		if (total == 1) {
-			this.onMove(to.getWorld(), to);
+			this.onMove(world, to);
 		} else {
 //TODO
-			this.onMove(to.getWorld(), to);
+			this.onMove(world, to);
 		}
 	}
 	protected void onMove(final World world, final Location to) {
