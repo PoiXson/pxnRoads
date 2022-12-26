@@ -6,8 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
 
+import com.poixson.roads.PlayerFollower;
 import com.poixson.roads.RoadsPlugin;
+import com.poixson.roads.builders.BuilderStreet;
 
 
 public class RoadsCommands implements CommandExecutor {
@@ -26,7 +29,7 @@ public class RoadsCommands implements CommandExecutor {
 
 
 	public void register() {
-		final PluginCommand cmd = this.plugin.getCommand("backrooms");
+		final PluginCommand cmd = this.plugin.getCommand("roads");
 		cmd.setExecutor(this);
 		this.cmds.add(cmd);
 		cmd.setTabCompleter( new RoadsTabCompleter() );
@@ -43,7 +46,24 @@ public class RoadsCommands implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command cmd,
 			final String label, final String[] args) {
+		final Player player = (sender instanceof Player ? (Player)sender : null);
+		final int numargs = args.length;
+		if (numargs >= 1) {
+			switch (args[0]) {
+			case "start": {
+				final PlayerFollower follower = new PlayerFollower(this.plugin, player);
 //TODO
+				follower.snap = true;
+				follower.builder = new BuilderStreet();
+				this.plugin.startFollower(follower);
+				return true;
+			}
+			case "stop":
+				this.plugin.stopFollower(player);
+				return true;
+			default: break;
+			}
+		}
 		return false;
 	}
 
