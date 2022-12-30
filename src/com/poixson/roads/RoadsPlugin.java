@@ -5,6 +5,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class RoadsPlugin extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 
 	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
+	protected static final AtomicReference<Metrics>     metrics  = new AtomicReference<Metrics>(null);
 
 	// listeners
 	protected final AtomicReference<RoadsCommands> commandListener = new AtomicReference<RoadsCommands>(null);
@@ -40,6 +42,9 @@ public class RoadsPlugin extends JavaPlugin {
 				previous.unregister();
 			listener.register();
 		}
+		// bStats
+		System.setProperty("bstats.relocatecheck","false");
+		metrics.set(new Metrics(this, 17234));
 	}
 
 	@Override
