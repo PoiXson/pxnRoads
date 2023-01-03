@@ -19,6 +19,8 @@ public class RoadsCommands extends pxnCommandsHandler {
 			plugin,
 			"roads"
 		);
+		this.addCommand(new CommandStart(plugin));
+		this.addCommand(new CommandStop(plugin));
 	}
 
 
