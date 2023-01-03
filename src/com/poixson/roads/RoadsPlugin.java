@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.poixson.roads.listeners.RoadsCommands;
+import com.poixson.roads.commands.RoadsCommands;
 
 
 public class RoadsPlugin extends JavaPlugin {
