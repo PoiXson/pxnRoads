@@ -10,11 +10,11 @@ import com.poixson.commonbukkit.tools.commands.pxnCommandsHandler;
 import com.poixson.roads.RoadsPlugin;
 
 
-public class RoadsCommands extends pxnCommandsHandler {
+public class Commands extends pxnCommandsHandler {
 
 
 
-	public RoadsCommands(final RoadsPlugin plugin) {
+	public Commands(final RoadsPlugin plugin) {
 		super(
 			plugin,
 			"roads"
