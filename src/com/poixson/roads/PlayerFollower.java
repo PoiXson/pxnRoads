@@ -27,7 +27,7 @@ public class PlayerFollower implements Listener {
 
 	public boolean snap = false;
 
-	public final String start_world;
+	public final String world;
 	public final int start_x;
 	public final int start_y;
 	public final int start_z;
@@ -42,7 +42,7 @@ public class PlayerFollower implements Listener {
 		this.player = player;
 		this.uuid   = player.getUniqueId();
 		final Location loc = player.getLocation();
-		this.start_world = loc.getWorld().getName();
+		this.world = loc.getWorld().getName();
 		this.start_x = loc.getBlockX();
 		this.start_y = loc.getBlockY();
 		this.start_z = loc.getBlockZ();
@@ -78,7 +78,7 @@ public class PlayerFollower implements Listener {
 		final Location to   = event.getTo();
 		// stop following outside of world
 		final World world = to.getWorld();
-		if (!this.start_world.equals(world)) {
+		if (!this.world.equals(world)) {
 			this.plugin.stopFollower(this.player);
 			return;
 		}

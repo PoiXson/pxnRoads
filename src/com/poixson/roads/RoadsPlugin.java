@@ -1,13 +1,9 @@
 package com.poixson.roads;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.poixson.commonmc.tools.plugin.xJavaPlugin;
@@ -15,19 +11,17 @@ import com.poixson.roads.commands.Commands;
 
 
 public class RoadsPlugin extends xJavaPlugin {
-	public static final String LOG_PREFIX  = "[Roads] ";
-	public static final String CHAT_PREFIX = ChatColor.AQUA + "[Roads] " + ChatColor.WHITE;
-	public static final Logger log = Logger.getLogger("Minecraft");
+	protected static final String LOG_PREFIX  = "[Roads] ";
 //TODO
-	public static final int SPIGOT_PLUGIN_ID = 0;
-	public static final int BSTATS_PLUGIN_ID = 17234;
+	protected static final int SPIGOT_PLUGIN_ID = 0;
+	protected static final int BSTATS_PLUGIN_ID = 17234;
 
 	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
 
 	// listeners
 	protected final AtomicReference<Commands> commandListener = new AtomicReference<Commands>(null);
 
-	protected final CopyOnWriteArraySet<PlayerFollower> followers = new CopyOnWriteArraySet<PlayerFollower>();
+	protected final ConcurrentHashMap<UUID, PlayerFollower> followers = new ConcurrentHashMap<UUID, PlayerFollower>();
 
 
 
@@ -62,29 +56,38 @@ public class RoadsPlugin extends xJavaPlugin {
 				listener.unregister();
 		}
 		if (!instance.compareAndSet(this, null))
-			throw new RuntimeException("Disable wrong instance of plugin?");
+			(new RuntimeException("Disable wrong instance of plugin?")).printStackTrace();
 	}
+
+
+
+	// -------------------------------------------------------------------------------
+	// player follower
 
 
 
 	public void startFollower(final PlayerFollower follower) {
 		this.stopFollower(follower.player);
-		this.followers.add(follower);
+		this.followers.put(follower.player.getUniqueId(), follower);
 		follower.start();
 	}
 
 	public boolean stopFollower(final Player player) {
-		final Iterator<PlayerFollower> it = this.followers.iterator();
-		while (it.hasNext()) {
-			final PlayerFollower follower = it.next();
-			if (follower.isPlayer(player))
-				return this.stopFollower(follower);
+		if (player != null) {
+			return this.stopFollower(player.getUniqueId());
 		}
 		return false;
 	}
-	public boolean stopFollower(final PlayerFollower follower) {
-		follower.stop();
-		return this.followers.remove(follower);
+	public boolean stopFollower(final UUID uuid) {
+		if (uuid != null) {
+			final PlayerFollower follower = this.followers.get(uuid);
+			if (follower != null) {
+				follower.stop();
+				this.followers.remove(uuid);
+				return true;
+			}
+		}
+		return false;
 	}
 
 
