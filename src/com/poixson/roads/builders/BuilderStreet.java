@@ -4,7 +4,7 @@ import org.bukkit.Axis;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import com.poixson.commonbukkit.tools.BlockPlotter;
+import com.poixson.commonmc.tools.BlockPlotter;
 
 
 public class BuilderStreet extends RoadBuilder {

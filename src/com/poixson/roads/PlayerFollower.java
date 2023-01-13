@@ -14,7 +14,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.poixson.commonbukkit.utils.LocationUtils;
+import com.poixson.commonmc.utils.LocationUtils;
 import com.poixson.roads.builders.RoadBuilder;
 
 

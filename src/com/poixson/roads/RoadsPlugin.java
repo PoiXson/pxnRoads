@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.poixson.commonbukkit.pxnCommonPlugin;
+import com.poixson.commonmc.pxnCommonPlugin;
 import com.poixson.roads.commands.Commands;
 import com.poixson.tools.AppProps;
 
