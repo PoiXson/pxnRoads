@@ -1,5 +1,6 @@
 package com.poixson.roads;
 
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -33,9 +34,9 @@ public class RoadsPlugin extends xJavaPlugin {
 
 	@Override
 	public void onEnable() {
-		super.onEnable();
 		if (!instance.compareAndSet(null, this))
 			throw new RuntimeException("Plugin instance already enabled?");
+		super.onEnable();
 		// commands listener
 		{
 			final Commands listener = new Commands(this);
@@ -54,6 +55,15 @@ public class RoadsPlugin extends xJavaPlugin {
 			final Commands listener = this.commandListener.getAndSet(null);
 			if (listener != null)
 				listener.unregister();
+		}
+		// stop followers
+		{
+			final Iterator<PlayerFollower> it = this.followers.values().iterator();
+			while (it.hasNext()) {
+				final PlayerFollower follower = it.next();
+				follower.stop();
+			}
+			this.followers.clear();
 		}
 		if (!instance.compareAndSet(this, null))
 			(new RuntimeException("Disable wrong instance of plugin?")).printStackTrace();
