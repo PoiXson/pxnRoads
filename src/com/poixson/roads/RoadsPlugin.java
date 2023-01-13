@@ -13,6 +13,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.poixson.roads.commands.Commands;
+import com.poixson.tools.AppProps;
 
 
 public class RoadsPlugin extends JavaPlugin {
@@ -22,11 +23,23 @@ public class RoadsPlugin extends JavaPlugin {
 
 	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
 	protected static final AtomicReference<Metrics>     metrics  = new AtomicReference<Metrics>(null);
+	protected final AppProps props;
 
 	// listeners
 	protected final AtomicReference<Commands> commandListener = new AtomicReference<Commands>(null);
 
 	protected final CopyOnWriteArraySet<PlayerFollower> followers = new CopyOnWriteArraySet<PlayerFollower>();
+
+
+
+	public RoadsPlugin() {
+		super();
+		try {
+			this.props = AppProps.LoadFromClassRef(RoadsPlugin.class);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 
 
