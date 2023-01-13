@@ -20,6 +20,7 @@ public class RoadsPlugin extends JavaPlugin {
 	public static final String LOG_PREFIX  = "[Roads] ";
 	public static final String CHAT_PREFIX = ChatColor.AQUA + "[Roads] " + ChatColor.WHITE;
 	public static final Logger log = Logger.getLogger("Minecraft");
+	public static final int BSTATS_PLUGIN_ID = 17234;
 
 	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
 	protected static final AtomicReference<Metrics>     metrics  = new AtomicReference<Metrics>(null);
@@ -57,7 +58,7 @@ public class RoadsPlugin extends JavaPlugin {
 		}
 		// bStats
 		System.setProperty("bstats.relocatecheck","false");
-		metrics.set(new Metrics(this, 17234));
+		metrics.set(new Metrics(this, BSTATS_PLUGIN_ID));
 	}
 
 	@Override
