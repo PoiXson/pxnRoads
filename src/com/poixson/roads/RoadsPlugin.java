@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.poixson.commonmc.tools.plugin.xJavaPlugin;
@@ -12,7 +13,8 @@ import com.poixson.roads.commands.Commands;
 
 
 public class RoadsPlugin extends xJavaPlugin {
-	protected static final String LOG_PREFIX  = "[Roads] ";
+	public static final String LOG_PREFIX  = "[Roads] ";
+	public static final String CHAT_PREFIX = ChatColor.AQUA + LOG_PREFIX + ChatColor.WHITE;
 //TODO
 	protected static final int SPIGOT_PLUGIN_ID = 0;
 	protected static final int BSTATS_PLUGIN_ID = 17234;
