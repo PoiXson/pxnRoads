@@ -15,9 +15,6 @@ import com.poixson.roads.commands.Commands;
 public class RoadsPlugin extends xJavaPlugin {
 	public static final String LOG_PREFIX  = "[Roads] ";
 	public static final String CHAT_PREFIX = ChatColor.AQUA + LOG_PREFIX + ChatColor.WHITE;
-//TODO
-	protected static final int SPIGOT_PLUGIN_ID = 0;
-	protected static final int BSTATS_PLUGIN_ID = 17234;
 
 	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
 
@@ -25,6 +22,9 @@ public class RoadsPlugin extends xJavaPlugin {
 	protected final AtomicReference<Commands> commandListener = new AtomicReference<Commands>(null);
 
 	protected final ConcurrentHashMap<UUID, PlayerFollower> followers = new ConcurrentHashMap<UUID, PlayerFollower>();
+
+	@Override public int getSpigotPluginID() { return 108151; }
+	@Override public int getBStatsID() {       return 17234;  }
 
 
 
@@ -100,21 +100,6 @@ public class RoadsPlugin extends xJavaPlugin {
 			}
 		}
 		return false;
-	}
-
-
-
-	// -------------------------------------------------------------------------------
-
-
-
-	@Override
-	protected int getSpigotPluginID() {
-		return SPIGOT_PLUGIN_ID;
-	}
-	@Override
-	protected int getBStatsID() {
-		return BSTATS_PLUGIN_ID;
 	}
 
 
