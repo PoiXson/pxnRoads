@@ -3,24 +3,19 @@ package com.poixson.roads;
 import java.util.UUID;
 
 import org.bukkit.Axis;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.poixson.commonmc.utils.LocationUtils;
+import com.poixson.commonmc.tools.plugin.xListener;
 import com.poixson.roads.builders.RoadBuilder;
 
 
-public class PlayerFollower implements Listener {
-
-	protected final RoadsPlugin plugin;
+public class PlayerFollower extends xListener<RoadsPlugin> {
 
 	protected final Player player;
 	protected final UUID   uuid;
@@ -38,7 +33,7 @@ public class PlayerFollower implements Listener {
 
 
 	public PlayerFollower(final RoadsPlugin plugin, final Player player) {
-		this.plugin = plugin;
+		super(plugin);
 		this.player = player;
 		this.uuid   = player.getUniqueId();
 		final Location loc = player.getLocation();
@@ -49,15 +44,6 @@ public class PlayerFollower implements Listener {
 		this.direction = player.getFacing();
 	}
 
-
-
-	public void start() {
-		Bukkit.getPluginManager()
-			.registerEvents(this, this.plugin);
-	}
-	public void stop() {
-		HandlerList.unregisterAll(this);
-	}
 
 
 	public boolean isPlayer(final Player player) {

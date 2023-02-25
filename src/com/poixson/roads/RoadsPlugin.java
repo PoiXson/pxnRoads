@@ -59,7 +59,7 @@ public class RoadsPlugin extends xJavaPlugin {
 			final Iterator<PlayerFollower> it = this.followers.values().iterator();
 			while (it.hasNext()) {
 				final PlayerFollower follower = it.next();
-				follower.stop();
+				follower.unregister();
 			}
 			this.followers.clear();
 		}
@@ -75,7 +75,7 @@ public class RoadsPlugin extends xJavaPlugin {
 	public void startFollower(final PlayerFollower follower) {
 		this.stopFollower(follower.player);
 		this.followers.put(follower.player.getUniqueId(), follower);
-		follower.start();
+		follower.register();
 	}
 
 	public boolean stopFollower(final Player player) {
@@ -88,7 +88,7 @@ public class RoadsPlugin extends xJavaPlugin {
 		if (uuid != null) {
 			final PlayerFollower follower = this.followers.get(uuid);
 			if (follower != null) {
-				follower.stop();
+				follower.unregister();
 				this.followers.remove(uuid);
 				return true;
 			}
