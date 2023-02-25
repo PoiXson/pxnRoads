@@ -16,8 +16,6 @@ public class RoadsPlugin extends xJavaPlugin {
 	public static final String LOG_PREFIX  = "[Roads] ";
 	public static final String CHAT_PREFIX = ChatColor.AQUA + LOG_PREFIX + ChatColor.WHITE;
 
-	protected static final AtomicReference<RoadsPlugin> instance = new AtomicReference<RoadsPlugin>(null);
-
 	// listeners
 	protected final AtomicReference<Commands> commandListener = new AtomicReference<Commands>(null);
 
@@ -36,8 +34,6 @@ public class RoadsPlugin extends xJavaPlugin {
 
 	@Override
 	public void onEnable() {
-		if (!instance.compareAndSet(null, this))
-			throw new RuntimeException("Plugin instance already enabled?");
 		super.onEnable();
 		// commands listener
 		{
@@ -67,8 +63,6 @@ public class RoadsPlugin extends xJavaPlugin {
 			}
 			this.followers.clear();
 		}
-		if (!instance.compareAndSet(this, null))
-			(new RuntimeException("Disable wrong instance of plugin?")).printStackTrace();
 	}
 
 
