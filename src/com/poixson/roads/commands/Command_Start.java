@@ -10,13 +10,13 @@ import com.poixson.roads.RoadsPlugin;
 import com.poixson.roads.builders.BuilderStreet;
 
 
-public class CommandStart extends pxnCommand {
+public class Command_Start extends pxnCommand {
 
 	protected final RoadsPlugin plugin;
 
 
 
-	public CommandStart(final RoadsPlugin plugin) {
+	public Command_Start(final RoadsPlugin plugin) {
 		super(
 			"start"
 		);

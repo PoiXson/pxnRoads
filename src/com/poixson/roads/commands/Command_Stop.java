@@ -8,13 +8,13 @@ import com.poixson.commonmc.tools.commands.pxnCommand;
 import com.poixson.roads.RoadsPlugin;
 
 
-public class CommandStop extends pxnCommand {
+public class Command_Stop extends pxnCommand {
 
 	protected final RoadsPlugin plugin;
 
 
 
-	public CommandStop(final RoadsPlugin plugin) {
+	public Command_Stop(final RoadsPlugin plugin) {
 		super(
 			"stop"
 		);
