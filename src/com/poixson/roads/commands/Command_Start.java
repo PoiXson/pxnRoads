@@ -17,9 +17,7 @@ public class Command_Start extends pxnCommand {
 
 
 	public Command_Start(final RoadsPlugin plugin) {
-		super(
-			"start"
-		);
+		super("start");
 		this.plugin = plugin;
 	}
 

@@ -15,9 +15,7 @@ public class Command_Stop extends pxnCommand {
 
 
 	public Command_Stop(final RoadsPlugin plugin) {
-		super(
-			"stop"
-		);
+		super("stop");
 		this.plugin = plugin;
 	}
 
